@@ -13,7 +13,7 @@ export default new Router({
       component: homeIndex
     },
     {
-      path: '/moduleVue',
+      path: '/vue',
       name: 'moduleVue',
       component: moduleVue
     },

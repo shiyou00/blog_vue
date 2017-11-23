@@ -46,7 +46,7 @@
     methods:{
       ...mapActions([
         'initializeData'
-      ]),
+      ])
     },
     created(){
       this.initializeData();

@@ -9,12 +9,11 @@
         <h2>{{content.title}}</h2>
         <div class="info">
           <span class="icon-grin"></span>
-          <span>{{content.name}}</span>
+          <span>{{content.author}}</span>
           <span class="icon-linkedin"></span>
-          <span>{{content.date}}</span>
+          <span>{{content.create_time}}</span>
         </div>
-        <div class="content-in" v-html="content.content">
-        </div>
+        <div class="content-in" v-html="content.content"></div>
       </div>
       <div class="rightSide fl">
         <moduleNotice></moduleNotice>
@@ -32,36 +31,27 @@
   import leftSide from '../../components/common/leftSide';
   import moduleNotice from '../../components/common/notice';
   import footerModule from '../../components/common/footer';
+  import { mapState, mapActions } from 'vuex';
   export default{
     name:"contentView",
     data(){
         return {
-            content:{}
         }
     },
     props:['id'],
+    computed: mapState([
+      'content'
+    ]),
     components:{
       moduleNav,leftSide,moduleNotice,footerModule
     },
     created(){
-      this.fetchArticleContent();
+      this.contentData(this.id);
     },
     methods: {
-      //通过文章id去查询相应的文章信息
-      fetchArticleContent () {
-        var that = this;
-        this.$ajax.get('/list.json')
-          .then(function (response) {
-            for(var i=0;i<response.data.length;i++){
-                if(response.data[i].id == that.id){
-                    that.content = response.data[i];
-                }
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }
+      ...mapActions([
+        'contentData'
+      ])
     }
   }
 </script>

@@ -4,14 +4,14 @@
       <h2>{{article.title}}</h2>
       <div class="info">
         <span class="icon-grin"></span>
-        <span>{{article.name}}</span>
+        <span>{{article.author}}</span>
         <span class="icon-linkedin"></span>
-        <span>{{article.date}}</span>
+        <span>{{article.update_time}}</span>
       </div>
-      <div class="article-content">{{article.des}}</div>
+      <div class="article-content">{{article.content}}</div>
       <div class="key">
         <i class="icon-file-text2"></i>
-        <span v-for="(item , index) in article.keyWord">{{item}}</span>
+        <span>{{article.keyWord}}</span>
       </div>
     </div>
   </router-link>

@@ -5,7 +5,8 @@ import actions from './action'
 /* eslint-disable */
 Vue.use(Vuex)
 const state = {
-  articleList:[]
+  articleList:[],
+  content:{}
 }
 export default new Vuex.Store({
   state,

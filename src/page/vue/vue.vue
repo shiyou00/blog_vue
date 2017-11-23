@@ -14,7 +14,7 @@
       <h1>该模块不显示</h1>
     </template>
     <!--v-show只是改变css的display属性-->
-
+    <div v-show="seen">我是show所以可以看到</div>
 
     <!--循环-->
     <ul>
@@ -62,12 +62,6 @@
     <!--v-on缩写成@-->
     <a href="javascript:;" @click="reverseMessage">{{message}}</a>
 
-    <!--计算属性-->
-
-    <!--监听器-->
-
-    <!--方法-->
-
     <!--
     绑定class
     下面这个是基础的绑定，然后非常灵活的绑定方式，可以直接绑定一个对象在上面，和绑定计算属性
@@ -88,12 +82,12 @@
   /* eslint-disable */
 export default{
   name:"vue",
-  //ES6方法简写
+  //data必须是一个函数，返回组件所需数据
   data(){
     return {
       message:'hello world',
       msg:"页面加载于："+new Date().toLocaleString(),
-      seen:false,
+      seen:true,
       isActive:true,
       error:false,
       todos:[
@@ -114,15 +108,13 @@ export default{
       fontSize:'30px'
     }
   },
+  //方法区：定义一些组件所需方法
   methods:{
       reverseMessage:function(){
           this.message = this.message.split('').reverse().join('');
       }
   },
-  created() {
-    console.log("vue组件初始化")
-    console.log(this.error);
-  },
+  //计算属性：对于一些数据进行逻辑运算，避免在模板中写的过于复杂
   computed:{
       classObj(){
         return {
@@ -130,6 +122,63 @@ export default{
           'text-danger': !this.error
         }
       }
+  },
+  /**
+   * 以下为生命周期，好比动物的一生，什么时期干什么事情
+   *
+   */
+  beforeCreate: function () {
+    console.group('beforeCreate 创建前状态===============》');
+    console.log("%c%s", "color:red" , "el     : " + this.$el); //undefined
+    console.log("%c%s", "color:red","data   : " + this.$data); //undefined
+    console.log("%c%s", "color:red","message: " + this.message); //undefined
+  },
+  created: function () {
+    console.group('created 创建完毕状态===============》');
+    console.log("%c%s", "color:red","el     : " + this.$el); //undefined
+    console.log("%c%s", "color:red","data   : " + this.$data); //已被初始化
+    console.log("%c%s", "color:red","message: " + this.message); //已被初始化
+  },
+  beforeMount: function () {
+    console.group('beforeMount 挂载前状态===============》');
+    console.log("%c%s", "color:red","el     : " + (this.$el)); //undefined
+    console.log("%c%s", "color:red","data   : " + this.$data); //已被初始化
+    console.log("%c%s", "color:red","message: " + this.message); //已被初始化
+  },
+  mounted: function () {
+    console.group('mounted 挂载结束状态===============》');
+    console.log("%c%s", "color:red","el     : " + this.$el); //已被初始化
+    console.log(this.$el);
+    console.log("%c%s", "color:red","data   : " + this.$data); //已被初始化
+    console.log("%c%s", "color:red","message: " + this.message); //已被初始化
+  },
+  beforeUpdate: function () {
+    console.group('beforeUpdate 更新前状态===============》');
+    console.log("%c%s", "color:red","el     : " + this.$el);
+    console.log(this.$el);
+    console.log("%c%s", "color:red","data   : " + this.$data);
+    console.log("%c%s", "color:red","message: " + this.message);
+  },
+  updated: function () {
+    console.group('updated 更新完成状态===============》');
+    console.log("%c%s", "color:red","el     : " + this.$el);
+    console.log(this.$el);
+    console.log("%c%s", "color:red","data   : " + this.$data);
+    console.log("%c%s", "color:red","message: " + this.message);
+  },
+  beforeDestroy: function () {
+    console.group('beforeDestroy 销毁前状态===============》');
+    console.log("%c%s", "color:red","el     : " + this.$el);
+    console.log(this.$el);
+    console.log("%c%s", "color:red","data   : " + this.$data);
+    console.log("%c%s", "color:red","message: " + this.message);
+  },
+  destroyed: function () {
+    console.group('destroyed 销毁完成状态===============》');
+    console.log("%c%s", "color:red","el     : " + this.$el);
+    console.log(this.$el);
+    console.log("%c%s", "color:red","data   : " + this.$data);
+    console.log("%c%s", "color:red","message: " + this.message)
   }
 }
 </script>
