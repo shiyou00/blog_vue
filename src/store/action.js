@@ -1,6 +1,7 @@
 /* eslint-disable */
 import axios from 'axios'
-const HOST = 'http://localhost:3000';
+const HOST = 'http://localhost:8082';
+// const HOST = '';
 export default {
   //初始化信息
   initializeData({ commit }) {

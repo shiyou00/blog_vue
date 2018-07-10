@@ -4,19 +4,17 @@
       <moduleNav></moduleNav>
     </div>
     <div class="middle clearfix">
-      <leftSide class="fl leftSide"></leftSide>
-      <div class="article-content fl">
+      <div class="article-content">
+        <div class="tool">
+          <router-link v-bind:to="{name:'editorIndex',params:{id:id}}">编辑</router-link>
+        </div>
         <h2>{{content.title}}</h2>
         <div class="info">
-          <span class="icon-grin"></span>
+          <span>作者：</span>
           <span>{{content.author}}</span>
-          <span class="icon-linkedin"></span>
           <span>{{content.create_time}}</span>
         </div>
-        <div class="content-in" v-html="content.content"></div>
-      </div>
-      <div class="rightSide fl">
-        <moduleNotice></moduleNotice>
+        <div class="content-in markdown-body" v-html="content.htmlValue"></div>
       </div>
     </div>
     <div class="footer">
@@ -56,22 +54,33 @@
   }
 </script>
 
-<style scoped lang="less" rel="stylesheet/less">
+<style scoped lang="scss" rel="stylesheet/scss">
   @import "../../style/homeIndex.less";
+  @import "../../../static/css/reset.scss";
+  @import "../../../static/css/github-markdown.css";
+  @import "../../../static/css/atom-one-dark.min.css";
   .article-content{
-    width:40%;
-    margin:25px;
+    width:90%;
+    display: block;
     box-sizing: border-box;
     background:#fff;
     min-height:440px;
-    padding-left:10px;
+    padding:10px;
+    margin:20px auto;
+    .tool{
+      text-align: right;
+      font-size:16px;
+      a{
+        color:#333;
+      }
+    }
     h2{
       color:#009688;
       font-size:32px;
     }
     .info{
       margin-top:20px;
-
+      margin-bottom:20px;
       span{
         margin-left:5px;
         color:#22557b;
@@ -79,4 +88,5 @@
       }
     }
   }
+
 </style>

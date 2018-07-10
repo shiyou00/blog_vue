@@ -6,9 +6,9 @@
         <span class="icon-grin"></span>
         <span>{{article.author}}</span>
         <span class="icon-linkedin"></span>
-        <span>{{article.update_time}}</span>
+        <span>{{article.create_time}}</span>
       </div>
-      <div class="article-content">{{article.content}}</div>
+      <div class="article-content">{{delHtmlTag}}</div>
       <div class="key">
         <i class="icon-file-text2"></i>
         <span>{{article.keyWord}}</span>
@@ -21,8 +21,13 @@
 <script>
   /* eslint-disable */
   export default{
-      name:'moduleArticle',
-      props: ['article']
+    name:'moduleArticle',
+    props: ['article'],
+    computed:{
+      delHtmlTag(){
+        return this.article.htmlValue.replace(/<[^>]+>/g,"");
+      }
+    }
   }
 </script>
 
